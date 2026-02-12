@@ -21,6 +21,7 @@ class Receta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // --- AppBar Original Restaurada ---
       appBar: AppBar(
         title: const Text(
           'RecipeRecive El Angel',
@@ -40,39 +41,52 @@ class Receta extends StatelessWidget {
           ),
         ],
       ),
-      // Lista de Platillos
+      // --- Lista de Opciones de Usuario ---
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-          _crearTarjetaPlatillo(
-            'Lasaña de Carne',
-            'Pasta italiana con salsa boloñesa y queso',
-            'https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=200&auto=format&fit=crop',
+          _crearOpcionMenu(
+            'Mi Perfil',
+            'Ver y editar mis datos personales',
+            Icons.person,
           ),
           const SizedBox(height: 16),
-          // --- IMAGEN ACTUALIZADA AQUÍ ---
-          _crearTarjetaPlatillo(
-            'Enchiladas Verdes',
-            'Tortillas rellenas de pollo con salsa de tomatillo y queso gratinado',
-            'mexican-enchiladas-verdes.jpg',
+          _crearOpcionMenu(
+            'Guardados',
+            'Tus recetas favoritas guardadas',
+            Icons.bookmark,
           ),
           const SizedBox(height: 16),
-          _crearTarjetaPlatillo(
-            'Pastel de Chocolate',
-            'Postre esponjoso con cobertura de ganache',
-            'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=200&auto=format&fit=crop',
+          _crearOpcionMenu(
+            'Me Gusta',
+            'Lista de platos que te han encantado',
+            Icons.favorite,
+          ),
+          const SizedBox(height: 16),
+          _crearOpcionMenu(
+            'Configuración',
+            'Ajustes de cuenta y notificaciones',
+            Icons.settings,
+          ),
+          const SizedBox(height: 16),
+          _crearOpcionMenu(
+            'Cerrar Sesión',
+            'Salir de la aplicación',
+            Icons.exit_to_app,
+            esPeligroso: true, // Para ponerlo en rojo
           ),
         ],
       ),
     );
   }
 
-  // Widget personalizado para los platillos
-  Widget _crearTarjetaPlatillo(
+  // Widget personalizado para las opciones
+  Widget _crearOpcionMenu(
     String nombre,
     String descripcion,
-    String urlImagen,
-  ) {
+    IconData icono, {
+    bool esPeligroso = false,
+  }) {
     return Card(
       color: const Color(0xFFF3E5F5), // Fondo lila muy claro
       elevation: 5,
@@ -82,28 +96,22 @@ class Receta extends StatelessWidget {
           horizontal: 20,
           vertical: 10,
         ),
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.network(
-            urlImagen,
-            width: 60,
-            height: 60,
-            fit: BoxFit.cover,
-            // Agregamos un manejador de errores por si acaso
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                width: 60,
-                height: 60,
-                color: Colors.grey[300],
-                child: const Icon(Icons.broken_image, color: Colors.grey),
-              );
-            },
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(
+            icono,
+            color: esPeligroso ? Colors.red : Colors.purple,
+            size: 30,
           ),
         ),
         title: Text(
           nombre,
-          style: const TextStyle(
-            color: Colors.purple,
+          style: TextStyle(
+            color: esPeligroso ? Colors.red : Colors.purple,
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -120,7 +128,7 @@ class Receta extends StatelessWidget {
           size: 18,
         ),
         onTap: () {
-          // Acción al tocar la tarjeta
+          // Acción al tocar la opción
         },
       ),
     );
