@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyWidget());
+void main() => runApp(const AppRecetario());
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class AppRecetario extends StatelessWidget {
+  const AppRecetario({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'RecipeRecive El Angel',
+      title: 'RecipeRecive',
       home: Receta(),
     );
   }
@@ -21,10 +21,9 @@ class Receta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // --- AppBar Original Restaurada ---
       appBar: AppBar(
         title: const Text(
-          'RecipeRecive El Angel',
+          'RecipeRecive',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -41,95 +40,118 @@ class Receta extends StatelessWidget {
           ),
         ],
       ),
-      // --- Lista de Opciones de Usuario ---
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: [
-          _crearOpcionMenu(
-            'Mi Perfil',
-            'Ver y editar mis datos personales',
-            Icons.person,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Naranja',
+                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 150,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.yellow,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Amarillo',
+                          style: TextStyle(fontSize: 24, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 40),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.pink,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Rosa',
+                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 150,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Verde',
+                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 40),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Azul',
+                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 150,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Rojo',
+                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 16),
-          _crearOpcionMenu(
-            'Guardados',
-            'Tus recetas favoritas guardadas',
-            Icons.bookmark,
-          ),
-          const SizedBox(height: 16),
-          _crearOpcionMenu(
-            'Me Gusta',
-            'Lista de platos que te han encantado',
-            Icons.favorite,
-          ),
-          const SizedBox(height: 16),
-          _crearOpcionMenu(
-            'Configuración',
-            'Ajustes de cuenta y notificaciones',
-            Icons.settings,
-          ),
-          const SizedBox(height: 16),
-          _crearOpcionMenu(
-            'Cerrar Sesión',
-            'Salir de la aplicación',
-            Icons.exit_to_app,
-            esPeligroso: true, // Para ponerlo en rojo
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Widget personalizado para las opciones
-  Widget _crearOpcionMenu(
-    String nombre,
-    String descripcion,
-    IconData icono, {
-    bool esPeligroso = false,
-  }) {
-    return Card(
-      color: const Color(0xFFF3E5F5), // Fondo lila muy claro
-      elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 10,
         ),
-        leading: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Icon(
-            icono,
-            color: esPeligroso ? Colors.red : Colors.purple,
-            size: 30,
-          ),
-        ),
-        title: Text(
-          nombre,
-          style: TextStyle(
-            color: esPeligroso ? Colors.red : Colors.purple,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-        subtitle: Text(
-          descripcion,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(color: Colors.black87),
-        ),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          color: Colors.purple,
-          size: 18,
-        ),
-        onTap: () {
-          // Acción al tocar la opción
-        },
       ),
     );
   }
